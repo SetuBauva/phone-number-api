@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,15 +26,10 @@ import com.bankonus.numberapi.controller.PhoneNumberController;
 import com.bankonus.numberapi.dao.PhoneNumberDao;
 import com.bankonus.numberapi.model.PhoneNumbers;
 
-import junit.framework.Assert;
-
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnit4.class)
 @ExtendWith(SpringExtension.class)
 public class PhoneNumberControllerTest {
-
-	// @Autowired
-	// private MockMvc mockMvc;
 
 	@Before
 	public void init() {
@@ -46,7 +42,6 @@ public class PhoneNumberControllerTest {
 	@Mock
 	private PhoneNumberDao repo;
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void getAllPhoneNumbers() throws Exception {
 
@@ -99,11 +94,11 @@ public class PhoneNumberControllerTest {
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-		//when(repo.save(any(PhoneNumbers.class))).thenReturn(true);
+		// when(repo.save(any(PhoneNumbers.class))).thenReturn(true);
 		PhoneNumbers pn = new PhoneNumbers(1, 1111, 1234567890, "Active");
 		when(repo.updateStatus(pn.getStatus(), pn.getCustomerID(), pn.getPhoneNumber())).thenReturn(1);
 		ResponseEntity<PhoneNumbers> responseEntity = employeeController.updatePhoneNumber(pn);
 
-		Assert.assertEquals(responseEntity.getStatusCode(),HttpStatus.CREATED);
+		Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);
 	}
 }

@@ -9,17 +9,19 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bankonus.numberapi.model.PhoneNumbers;
+
+/**
+ * Repository for performing Database operations
+ */
 @Repository
-public interface PhoneNumberDao extends JpaRepository<PhoneNumbers, Integer>{
+public interface PhoneNumberDao extends JpaRepository<PhoneNumbers, Integer> {
 
 	public List<PhoneNumbers> findByCustomerID(int customerID);
-	
+
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query(value = "Update PHONE_NUMBERS \n" + 
-			"Set status = ?1\n" + 
-			"where customerId = ?2\n" + 
-			"and phone_number = ?3", nativeQuery = true)
-	public int updateStatus(String status,int customerId,int phone_number);
+	@Query(value = "Update PHONE_NUMBERS set status = ?1 where customerId = ?2\n"
+			+ "and phone_number = ?3", nativeQuery = true)
+	public int updateStatus(String status, int customerId, int phone_number);
 
 }
