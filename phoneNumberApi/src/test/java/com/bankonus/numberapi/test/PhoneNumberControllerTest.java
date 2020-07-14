@@ -99,6 +99,6 @@ public class PhoneNumberControllerTest {
 		when(repo.updateStatus(pn.getStatus(), pn.getCustomerID(), pn.getPhoneNumber())).thenReturn(1);
 		ResponseEntity<PhoneNumbers> responseEntity = employeeController.updatePhoneNumber(pn);
 
-		Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);
+		Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
 	}
 }
